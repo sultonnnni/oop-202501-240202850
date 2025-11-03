@@ -1,114 +1,196 @@
-# Laporan Praktikum Minggu 1 (sesuaikan minggu ke berapa?)
-Topik: [Tuliskan judul topik, misalnya "Class dan Object"]
+
+
+# Laporan Praktikum Minggu 4 📅
+
+Topik: **Polymorphism (Info Produk Pertanian)**
 
 ## Identitas
-- Nama  : [Ahmad Sultoni]
-- NIM   : [240202850]
-- Kelas : [3IKRA]
 
----
+  * Nama : **Ahmad Sultoni**
+  * NIM : **240202850**
+  * Kelas : **3 IKRA**
 
-## Tujuan
-1.Mahasiswa memahami dan mampu mengimplementasikan konsep Inheritance (Pewarisan) di Java.
+-----
 
-2.Mahasiswa dapat membuat Superclass (Produk) dan Subclass (misalnya Benih, Pupuk) untuk memodelkan data produk yang memiliki hierarki.
+## Tujuan 🎯
 
-3.Mahasiswa mampu menggunakan kata kunci super untuk memanggil constructor dan method dari Superclass.
+  * **Menjelaskan konsep polymorphism** (overloading, overriding, dan dynamic binding) dalam OOP.
+  * **Mengimplementasikan polymorphism** untuk membedakan perilaku objek produk pertanian yang berbeda.
+  * **Menganalisis penggunaan *Dynamic Binding*** saat mengakses objek *subclass* melalui referensi *superclass*.
 
-Dasar Teori
+-----
 
----
+## Dasar Teori 📚
 
-## Dasar Teori
-1.Inheritance (Pewarisan): Mekanisme dalam OOP yang memungkinkan sebuah class anak (subclass) mewarisi atribut dan method dari class induk (superclass). Tujuan utamanya adalah code reusability.
+**Polymorphism** (berasal dari bahasa Yunani yang berarti "banyak bentuk") adalah kemampuan objek untuk merespons panggilan method yang sama dengan cara yang berbeda, berdasarkan tipe objek aktualnya.
 
-2.Superclass & Subclass: Superclass (misalnya Produk) adalah class yang diwariskan, sementara Subclass (misalnya Benih) adalah class yang mewarisi (extend) Superclass.
+1.  **Overloading (Compile-Time Polymorphism):** Mendefinisikan method dengan **nama yang sama** tetapi **parameter yang berbeda** (jumlah, tipe, atau urutan).
+2.  **Overriding (Run-Time Polymorphism):** *Subclass* (anak) mengganti implementasi method yang sudah ada di *Superclass* (induk) dengan **signature (nama, parameter, tipe kembalian) yang sama**.
+3.  **Dynamic Binding:** Mekanisme di mana method yang dipanggil **ditentukan saat program berjalan (runtime)**, bukan saat kompilasi. Ini memungkinkan Java memanggil method `getInfo()` yang spesifik pada *subclass* meskipun dipanggil dari referensi *superclass* (`Produk p`).
 
-3.Kata Kunci super: Digunakan di dalam Subclass untuk merujuk pada anggota Superclass. Ini wajib digunakan untuk memanggil constructor Superclass (super(...)) agar atribut yang diwarisi dapat diinisialisasi.
+-----
 
-4.Overriding Method: Subclass dapat mengubah implementasi method yang sudah ada di Superclass (walaupun dalam kasus ini kita hanya memperluas dengan method baru yang memanggil method super).
----
+## Langkah Praktikum 📝
 
-## Langkah Praktikum
-1.Setup File: Membuat class induk Produk.java dan class utama Main.java.
+1.  **Struktur:** Membuat *superclass* `Produk` dan *subclass* seperti `Benih`, `Pupuk`, dan `AlatPertanian`.
+2.  **Overloading:** Menambahkan *method* `tambahStok()` di `Produk.java` dengan parameter berbeda (misalnya `int` dan `double`).
+3.  **Overriding:** Menambahkan *method* `getInfo()` di `Produk.java` dan menimpanya (`@Override`) di setiap *subclass* untuk menampilkan detail spesifik produk (misalnya: varietas untuk Benih, jenis untuk Pupuk, material untuk AlatPertanian).
+4.  **Dynamic Binding:** Mendeklarasikan *array* dengan tipe referensi *superclass* (`Produk[]`) yang diisi dengan berbagai objek *subclass*. Melakukan *loop* untuk memanggil `p.getInfo()`.
+5.  **CreditBy:** Memastikan *method* `CreditBy.print()` dipanggil dengan NIM dan Nama yang benar di `MainPolymorphism.java`.
 
-2.Implementasi Superclass: Class Produk.java dibuat dengan atribut dasar (kode, nama, harga, stok) yang sifatnya umum untuk semua produk.
-
-3.Implementasi Subclass: Enam Subclass (seperti Benih, Pupuk, Pestisida) dibuat dan mewarisi (extends) class Produk. Setiap Subclass menambahkan atribut spesifiknya (misalnya varietas pada Benih).
-
-4.Penggunaan super: Di setiap constructor Subclass, dipanggil super(kode, nama, harga, stok) untuk memastikan inisialisasi atribut dasar dilakukan oleh Superclass.
-
-5.Eksekusi dan Tampilan: Class Main.java membuat instance dari setiap Subclass dan memanggil method tampilannya untuk mencetak detail produk ke konsol, termasuk credit Nama dan NIM.
----
+-----
 
 ## Kode Program
-// Dari file Produk.java (Superclass)
+
+### Produk.java (Superclass & Overloading)
+
+```java
+package com.upb.agripos.model;
+
 public class Produk {
     private String kode;
-    // ...
+    private String nama;
+    private double harga;
+    private int stok;
+
     public Produk(String kode, String nama, double harga, int stok) {
-        this.kode = kode; // ... inisialisasi
+        this.kode = kode;
+        this.nama = nama;
+        this.harga = harga;
+        this.stok = stok;
     }
-    public void tampilkanDetailDasar() {
-        System.out.println("Kode: " + kode);
-        // ...
+
+    // Overloading (1): Parameter int
+    public void tambahStok(int jumlah) {
+        this.stok += jumlah;
+    }
+
+    // Overloading (2): Parameter double
+    public void tambahStok(double jumlah) {
+        this.stok += (int) jumlah; // Konversi ke int
+    }
+
+    // Default method for Overriding
+    public String getInfo() {
+        return "Produk: " + nama + " (Kode: " + kode + ") Harga: Rp." + harga;
     }
 }
+```
 
-// Dari Subclass (Contoh Benih)
-class Benih extends Produk {
+### Benih.java (Overriding)
+
+```java
+package com.upb.agripos.model;
+
+public class Benih extends Produk {
     private String varietas;
 
     public Benih(String kode, String nama, double harga, int stok, String varietas) {
-        super(kode, nama, harga, stok); // Memanggil constructor Superclass
+        super(kode, nama, harga, stok);
         this.varietas = varietas;
     }
-    // ...
-}
 
-// Dari file Main.java (Eksekusi)
-public class Main {
-    public static void main(String[] args) {
-        Benih benih = new Benih("BNH-001", "Benih Padi IR64", 25000.0, 100, "IR64");
-        Pupuk pupuk = new Pupuk("PPK-101", "Pupuk Urea", 350000.0, 40, "Urea");
-        
-        benih.tampilkanDetail(); 
-        System.out.println("---"); 
-        pupuk.tampilkanDetail();
-        
-        System.out.println("\ncredit by: 240202850 - Ahmad Sultoni");
-        // ...
+    @Override
+    public String getInfo() {
+        // Memanggil getInfo() dari superclass untuk mendapatkan info dasar
+        return "Benih: " + super.getInfo() + ", Varietas: " + varietas;
     }
 }
+```
 
+### MainPolymorphism.java (Implementasi Dynamic Binding)
 
----
+```java
+package com.upb.agripos;
+
+import com.upb.agripos.Util.CreditBy;
+import com.upb.agripos.model.AlatPertanian;
+import com.upb.agripos.model.Benih;
+import com.upb.agripos.model.Pupuk;
+import com.upb.agripos.model.Produk;
+
+public class MainPolymorphism {
+    public static void main(String[] args) {
+        
+        // 1. Dynamic Binding: Deklarasi array dengan tipe Superclass (Produk)
+        Produk[] daftarProduk = {
+            new Benih("BNH-001", "Benih Padi IR64", 25000, 100, "IR64"),
+            new Pupuk ("PPK-101", "Pupuk Urea", 350000, 40, "Urea"),
+            new AlatPertanian("ALT-501", "Cangkul Baja", 90000, 15, "Baja"),
+            // Objek lain (misalnya: BibitBuah yang Anda sebutkan)
+            // new BibitBuah("BBH-401", "Bibit Mangga Harum Manis", 45000, 30, "Mangga")
+        };
+
+        // 2. Dynamic Binding: Loop dan panggil method yang dioverride
+        for (Produk p : daftarProduk) {
+            System.out.println(p.getInfo()); 
+        }
+
+        // 3. Demonstrasi Overloading (opsional, untuk memastikan)
+        Produk pupuk = daftarProduk[1];
+        pupuk.tambahStok(10); // Memanggil tambahStok(int)
+        pupuk.tambahStok(5.5); // Memanggil tambahStok(double)
+        
+        // Credit Sesuai Identitas Anda
+        CreditBy.print("240202850", "Ahmad Sultoni"); 
+    }
+}
+```
+
+*(Catatan: Saya tidak menyertakan kode `AlatPertanian.java`, `BibitBuah.java`, `Pupuk.java` dan `CreditBy.java` karena Anda sudah memilikinya, namun dipastikan sudah meng-*override* `getInfo()`)*
+
+-----
 
 ## Hasil Eksekusi
-<img width="1045" height="883" alt="image" src="https://github.com/user-attachments/assets/fa2345ac-983d-4b44-b3a8-66ddb1f63dd6" />
+<img width="1920" height="1200" alt="Cuplikan layar 2025-11-03 082401" src="https://github.com/user-attachments/assets/c63039ee-cfe0-4ff6-b931-34b3ea651f59" />
 
----
 
-## Analisis
-1.Cara Kerja Kode: Class Produk menyediakan blueprint dasar untuk setiap produk. Subclass seperti Benih mewarisi cetak biru tersebut, sehingga tidak perlu mendefinisikan ulang properti dasar (kode, nama, harga, stok). Setiap Subclass hanya fokus pada penambahan atribut uniknya (misalnya, varietas pada Benih). Method tampilan detail pada Subclass memanfaatkan method tampilkanDetailDasar() dari Superclass menggunakan super.tampilkanDetailDasar(), menjamin konsistensi dan efisiensi kode.
+-----
 
-2.Perbedaan Pendekatan Minggu Ini: Pendekatan minggu ini (OOP dengan Inheritance) jauh lebih unggul daripada pendekatan procedural (Minggu 1) yang mungkin hanya menggunakan satu method main dan banyak System.out.println(). Inheritance memungkinkan data dimodelkan sesuai dunia nyata, meminimalkan duplikasi kode, dan memudahkan penambahan jenis produk baru.
+## Analisis 🔍
 
-Kendala yang Dihadapi dan Cara Mengatasinya:
+Program mendemonstrasikan Polimorfisme melalui tiga cara:
 
-Kendala Utama: Saat awal implementasi, terjadi syntax error dan masalah package (7 error) yang disebabkan oleh ketidaklengkapan tanda kutip atau kurung kurawal, serta ketidaksesuaian nama package dengan struktur direktori.
+1.  **Overloading:** *Method* `tambahStok()` di kelas `Produk` memiliki dua versi, yang dipilih berdasarkan tipe data parameter saat *compile-time*.
+2.  **Overriding:** *Method* `getInfo()` di `Produk` diganti implementasinya di *subclass* (`Benih`, `Pupuk`, dll.) untuk menyajikan informasi yang lebih spesifik (misalnya, menambahkan **Varietas** untuk Benih).
+3.  **Dynamic Binding:** Saat *loop* berjalan (`for (Produk p : daftarProduk)`), meskipun variabel `p` bertipe `Produk`, Java secara otomatis menentukan dan memanggil *method* `getInfo()` milik objek **aktual** yang direferensikan (`Benih`, `Pupuk`, dll.) pada saat *runtime*. Ini menghasilkan *output* yang bervariasi.
 
-Cara Mengatasi: Kesalahan sintaks diatasi dengan debugging pada baris-baris System.out.println() terakhir. Masalah package diatasi dengan memastikan file diletakkan di struktur folder yang benar (.../com/upb/agripos/) atau menghapus deklarasi package jika proyek dijalankan secara sederhana.
----
+Penerapan Polimorfisme ini membuat kode menjadi lebih **fleksibel** dan **skalabel** (mudah ditambahkan jenis produk baru tanpa mengubah kode *loop* utama).
+
+-----
 
 ## Kesimpulan
-Praktikum ini berhasil mengimplementasikan konsep Inheritance yang merupakan pilar penting dalam OOP. Dengan memisahkan atribut umum ke dalam Superclass (Produk) dan atribut spesifik ke dalam Subclass, kode menjadi sangat terstruktur, reusable, dan mudah di-maintain.
 
-## Quiz
-(1. Apa fungsi utama dari kata kunci extends dalam Java?  
-   Jawaban: Kata kunci extends digunakan untuk menunjukkan bahwa sebuah class mewarisi properti dan method dari class lain, menciptakan hubungan is-a (seperti Benih adalah Produk).   
+Penerapan **Polymorphism** sangat penting dalam perancangan OOP karena memungkinkan objek yang berbeda berbagi *interface* yang sama, sehingga program menjadi lebih **dinamis** dan **efisien**. *Dynamic Binding* khususnya, memastikan pemanggilan *method* selalu tepat sasaran sesuai tipe objek aktual saat program berjalan, mencapai tujuan kode yang *loose-coupled*.
 
-2. Mengapa pemanggilan super() harus menjadi pernyataan pertama dalam constructor Subclass?  
-   Jawaban: Karena constructor Subclass tidak dapat bekerja dengan atribut yang diwarisi sebelum constructor Superclass selesai menginisialisasi atribut tersebut. Pemanggilan super() menjamin Superclass diinisialisasi terlebih dahulu.  
-3. Bagaimana kita bisa memanggil method yang didefinisikan di Superclass dari dalam Subclass? Berikan contohnya!  
-   Jawaban: Kita menggunakan kata kunci super. Contohnya adalah super.tampilkanDetailDasar() yang dipanggil di method tampilkanDetail() dari Subclass Benih.
+-----
+
+## Checklist Keberhasilan
+
+  * [x] Overloading `tambahStok` berhasil.
+  * [x] Overriding `getInfo` pada subclass berjalan.
+  * [x] Dynamic binding berjalan melalui array produk.
+  * [x] Output menampilkan identitas mahasiswa (240202850 - Ahmad Sultoni).
+  * [x] Screenshot & laporan disertakan.
+
+-----
+
+## 🧠 Quiz – Praktikum Week 4: Polymorphism
+
+1.  **Apa perbedaan overloading dan overriding?**
+    **Jawaban:**
+
+      * **Overloading** adalah dua *method* dengan **nama sama** tetapi **parameter berbeda**, dan ditentukan saat **Compile Time**.
+      * **Overriding** adalah *method* di *subclass* yang menimpa *method* di *superclass* dengan **signature yang sama**, dan ditentukan saat **Run Time**.
+
+2.  **Bagaimana Java menentukan method mana yang dipanggil dalam dynamic binding?**
+    **Jawaban:**
+    Java menentukan *method* yang dipanggil **berdasarkan tipe objek aktual** yang disimpan dalam variabel referensi (**saat program berjalan**), bukan berdasarkan tipe deklarasi variabel referensinya. Ini memastikan *method* yang dioverride oleh *subclass* yang dieksekusi.
+
+3.  **Berikan contoh kasus polymorphism dalam sistem POS selain produk pertanian.**
+    **Jawaban:**
+    Contoh dalam sistem POS **Perpustakaan**:
+
+      * Superclass: `Item` dengan *method* `hitungDenda()`.
+      * Subclass: `Buku`, `Majalah`, `CD`, masing-masing meng-*override* `hitungDenda()` dengan tarif yang berbeda.
+      * Sistem dapat memproses daftar `Item[]` yang terlambat dikembalikan, dan *Dynamic Binding* akan memastikan denda dihitung sesuai jenis *item* (misalnya denda `Majalah` lebih rendah dari `Buku`).
