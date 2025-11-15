@@ -111,9 +111,8 @@ public class Main {
 ---
 
 ## Hasil Eksekusi
-(Sertakan screenshot hasil eksekusi program.  
+<img width="1920" height="1200" alt="Cuplikan layar 2025-10-16 185001" src="https://github.com/user-attachments/assets/7f8fc8b2-ad95-40e1-a553-0cec0f383866" />
 
-)
 ---
 
 ## Analisis
