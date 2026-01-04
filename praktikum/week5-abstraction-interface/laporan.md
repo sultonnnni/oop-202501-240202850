@@ -287,6 +287,7 @@ public class MainAbstraction {
 ---
 
 ## Hasil Eksekusi
+https://github.com/sultonnnni/oop-202501-240202850/blob/b043131720209d2136e852d867477caafb9a1c22/praktikum/week5-abstraction-interface/screenshots/Cuplikan%20layar%202026-01-04%20165807.png
 
 
 ---
