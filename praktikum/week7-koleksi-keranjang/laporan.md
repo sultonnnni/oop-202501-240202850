@@ -1,6 +1,4 @@
-Berikut adalah draf laporan praktikum yang sudah disusun secara sistematis berdasarkan kode dan hasil eksekusi yang telah kamu selesaikan tadi.
 
----
 
 # Laporan Praktikum Minggu 7
 
@@ -10,7 +8,7 @@ Topik: **Koleksi Objek (Collection) - ArrayList dalam Keranjang Belanja**
 
 * **Nama** : Ahmad Sultoni
 * **NIM** : 240202850
-* **Kelas** : [Silakan isi kelasmu, misal: TI-A]
+* **Kelas** : 3IKRA
 
 ---
 
