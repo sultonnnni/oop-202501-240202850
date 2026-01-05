@@ -1,73 +1,82 @@
-# Laporan Praktikum Minggu 1 (sesuaikan minggu ke berapa?)
-Topik: [Tuliskan judul topik, misalnya "Class dan Object"]
+
+
+# Laporan Praktikum Minggu 9
+
+Topik: **Exception Handling (Penanganan Instruksi Tidak Wajar)**
 
 ## Identitas
-- Nama  : [Nama Mahasiswa]
-- NIM   : [NIM Mahasiswa]
-- Kelas : [Kelas]
+
+* **Nama** : Ahmad Sultoni
+* **NIM** : 240202850
+* **Kelas** : 3IKRA
 
 ---
 
 ## Tujuan
-(Tuliskan tujuan praktikum minggu ini.  
-Contoh: *Mahasiswa memahami konsep class dan object serta dapat membuat class Produk dengan enkapsulasi.*)
+
+Mahasiswa mampu mengimplementasikan mekanisme **Exception Handling** menggunakan blok `try-catch` dan keyword `throw` untuk menangani kesalahan logika program (seperti stok habis atau input tidak valid) agar aplikasi tidak berhenti secara paksa (*crash*).
 
 ---
 
 ## Dasar Teori
-(Tuliskan ringkasan teori singkat (3–5 poin) yang mendasari praktikum.  
-Contoh:  
-1. Class adalah blueprint dari objek.  
-2. Object adalah instansiasi dari class.  
-3. Enkapsulasi digunakan untuk menyembunyikan data.)
+
+1. **Exception**: Sebuah objek yang merepresentasikan kejadian luar biasa atau kesalahan yang terjadi saat program sedang berjalan (runtime).
+2. **Try-Catch**: Blok kode yang digunakan untuk mencoba menjalankan perintah yang berisiko error (`try`) dan menangkap kesalahan tersebut jika terjadi (`catch`).
+3. **Custom Exception**: Pembuatan class pengecualian sendiri (misal: `KeranjangException`) untuk menangani kasus spesifik dalam logika bisnis aplikasi.
+4. **Throw**: Keyword yang digunakan untuk melempar exception secara manual ketika suatu kondisi validasi tidak terpenuhi.
 
 ---
 
 ## Langkah Praktikum
-(Tuliskan Langkah-langkah dalam prakrikum, contoh:
-1. Langkah-langkah yang dilakukan (setup, coding, run).  
-2. File/kode yang dibuat.  
-3. Commit message yang digunakan.)
+
+1. **Persiapan**: Membuka VS Code dan menuju ke folder `praktikum/week9-exception-handling/`.
+2. **Coding**: Membuat file `MainExceptionDemo.java` yang berisi class `Product`, `ShoppingCart`, dan `KeranjangException`.
+3. **Identitas**: Menyesuaikan output program agar menampilkan nama **Ahmad Sultoni** dan NIM **240202850**.
+4. **Kompilasi**: Menjalankan perintah `javac MainExceptionDemo.java` di terminal untuk mengubah kode sumber menjadi bytecode.
+5. **Eksekusi**: Menjalankan program menggunakan perintah `java MainExceptionDemo` dan mengamati hasil penangkapan error di terminal.
 
 ---
 
 ## Kode Program
-(Tuliskan kode utama yang dibuat, contoh:  
 
 ```java
-// Contoh
-Produk p1 = new Produk("BNH-001", "Benih Padi", 25000, 100);
-System.out.println(p1.getNama());
+// Bagian utama penanganan Exception dalam MainExceptionDemo.java
+try {
+    // Validasi stok produk (Pupuk Organik dengan stok 5, diminta 10)
+    cart.validateStock(pupuk, 10);
+} catch (KeranjangException e) {
+    // Menampilkan pesan kesalahan tanpa menghentikan program
+    System.out.println("Kesalahan: " + e.getMessage());
+}
+
 ```
-)
+
 ---
 
 ## Hasil Eksekusi
-(Sertakan screenshot hasil eksekusi program.  
-![Screenshot hasil](screenshots/hasil.png)
-)
+
+https://github.com/sultonnnni/oop-202501-240202850/blob/86581ff0373a9cfc00478c6635eebcbda2c60b50/praktikum/week9-exception-handling/screenshots/Cuplikan%20layar%202026-01-05%20095504.png
+
 ---
 
 ## Analisis
-(
-- Jelaskan bagaimana kode berjalan.  
-- Apa perbedaan pendekatan minggu ini dibanding minggu sebelumnya.  
-- Kendala yang dihadapi dan cara mengatasinya.  
-)
+
+* **Alur Kode**: Program secara sengaja menguji kondisi yang salah (seperti memasukkan quantity 0 atau meminta stok melebihi batas). Saat kondisi ini terdeteksi, program melempar `KeranjangException`.
+* **Mekanisme**: Karena kode dibungkus dalam blok `try-catch`, program tidak berhenti (force close), melainkan langsung melompat ke blok `catch` untuk mencetak pesan edukatif di terminal.
+* **Kendala & Solusi**: Terdapat kendala "Could not find main class" dan masalah *classpath* pada VS Code. Kendala ini diatasi dengan melakukan kompilasi dan pemanggilan program secara manual lewat terminal.
+
 ---
 
 ## Kesimpulan
-(Tuliskan kesimpulan dari praktikum minggu ini.  
-Contoh: *Dengan menggunakan class dan object, program menjadi lebih terstruktur dan mudah dikembangkan.*)
+
+Dengan menerapkan *Exception Handling*, program menjadi lebih tangguh (*robust*) karena mampu menangani kesalahan pengguna atau data secara mandiri tanpa merusak alur kerja aplikasi secara keseluruhan.
 
 ---
 
 ## Quiz
-(1. [Tuliskan kembali pertanyaan 1 dari panduan]  
-   **Jawaban:** …  
 
-2. [Tuliskan kembali pertanyaan 2 dari panduan]  
-   **Jawaban:** …  
+1. **Apa fungsi dari blok `finally`?**
+**Jawaban:** Blok yang akan selalu dijalankan baik terjadi exception maupun tidak, biasanya digunakan untuk menutup koneksi database atau file.
+2. **Apa perbedaan antara `throw` dan `throws`?**
+**Jawaban:** `throw` digunakan untuk melempar exception secara manual di dalam method, sedangkan `throws` digunakan di signature method untuk memberitahu bahwa method tersebut berpotensi menghasilkan exception.
 
-3. [Tuliskan kembali pertanyaan 3 dari panduan]  
-   **Jawaban:** …  )
