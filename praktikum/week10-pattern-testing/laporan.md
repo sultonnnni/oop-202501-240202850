@@ -106,6 +106,7 @@ public class ProductTest {
 https://github.com/sultonnnni/oop-202501-240202850/blob/e1e8ceabd747ce845078e3a91b91228460d27d89/praktikum/week10-pattern-testing/screenshots/Cuplikan%20layar%202026-01-21%20121715.png
 
 * **Output Aplikasi Utama**: Menampilkan identitas Ahmad Sultoni dan data Pupuk Organik.
+
 https://github.com/sultonnnni/oop-202501-240202850/blob/e1e8ceabd747ce845078e3a91b91228460d27d89/praktikum/week10-pattern-testing/screenshots/Cuplikan%20layar%202026-01-21%20122023.png
 
 * **Output Unit Testing**: Menampilkan status **[PASS]** yang menandakan tes berhasil.
