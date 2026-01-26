@@ -14,7 +14,7 @@ public class DatabaseConnection {
         try {
             String url = "jdbc:postgresql://localhost:5432/agripos_db"; // DB seragam
             String user = "postgres";
-            String password = "bagusafm"; // Password kamu
+            String password = "sltnnnn"; // Password kamu
             
             this.connection = DriverManager.getConnection(url, user, password);
             System.out.println("LOG: Koneksi Database Berhasil (Singleton)");
