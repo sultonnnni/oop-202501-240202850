@@ -70,12 +70,6 @@ Agri-POS adalah aplikasi kasir sederhana untuk toko pertanian. Aplikasi ini memi
 
 ## 📂 Implementasi Kode Program
 
-*(Kode tetap sama, **tidak perlu diubah**, kecuali bagian identitas di Main Application)*
-
----
-
-### 🔧 Perubahan Penting (WAJIB DIGANTI)
-
 #### **File:** `AppJavaFX.java`
 
 ```java
